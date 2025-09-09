@@ -7,10 +7,11 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/lights_Ryan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="@string/hello_world"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,5 +53,24 @@
 
         <Button style="@style/LightButton" />
     </GridLayout>
+
+    <Button
+        android:id="@+id/lights_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/lights_off"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/light_grid" />
+
+    <Button
+        android:id="@+id/randomize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="@string/randomize"
+        app:layout_constraintStart_toEndOf="@+id/lights_off"
+        app:layout_constraintTop_toTopOf="@+id/lights_off" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

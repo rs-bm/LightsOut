@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">LightsOut</string>
+    <string name="hello_world">Hello World!</string>
+    <string name="lights_off">Lights off</string>
+    <string name="randomize">Randomize</string>
 </resources>
