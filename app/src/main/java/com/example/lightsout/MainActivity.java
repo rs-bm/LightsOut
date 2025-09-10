@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private GridLayout grid;
     private boolean cellState[][];
     TextView score;
+    Button lightsOff;
+    Button randomize;
     View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -36,7 +38,32 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             recolor();
-            score.setText("" + counter(cellState));
+            setScore();
+        }
+    };
+    View.OnClickListener lightsOffListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Button gridButton;
+            int row, col;
+            for (int i = 0; i< grid.getChildCount(); i++) {
+                gridButton = (Button) grid.getChildAt(i);
+                row = i / GRID_SIZE;
+                col = i % GRID_SIZE;
+                if (cellState[row][col]) {
+                    cellState[row][col] = false;
+                }
+            }
+            recolor();
+            setScore();
+        }
+    };
+    View.OnClickListener randomizeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            randomize();
+            recolor();
+            setScore();
         }
     };
 
@@ -48,14 +75,14 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         grid = findViewById(R.id.light_grid);
-
-        randomize();
-
-        recolor();
-
         score = findViewById(R.id.scoreNum);
-        score.setText("" + counter(cellState));
-
+        randomize = findViewById(R.id.randomize);
+        randomize.setOnClickListener(randomizeListener);
+        lightsOff = findViewById(R.id.lights_off);
+        lightsOff.setOnClickListener(lightsOffListener);
+        randomize();
+        recolor();
+        setScore();
         for (int i = 0; i < grid.getChildCount(); i++) {
             Button currButton = (Button) grid.getChildAt(i);
             currButton.setOnClickListener(buttonListener);
@@ -77,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    public int counter(boolean[][] cs) {
+    public void setScore() {
         int count = 0;
         for (int i = 0; i < cellState.length; i++) {
             for (int j = 0; j < cellState[i].length; j++) {
@@ -86,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        return count;
+        score.setText("" + count);
     }
 
     public void randomize() {
