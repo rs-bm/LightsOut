@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int GRID_SIZE = 3;
     private GridLayout grid;
     private boolean cellState[][];
+    TextView score;
     View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             recolor();
+            score.setText("" + counter(cellState));
         }
     };
 
@@ -49,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         randomize();
 
         recolor();
+
+        score = findViewById(R.id.scoreNum);
+        score.setText("" + counter(cellState));
 
         for (int i = 0; i < grid.getChildCount(); i++) {
             Button currButton = (Button) grid.getChildAt(i);
@@ -70,6 +76,17 @@ public class MainActivity extends AppCompatActivity {
                 gridButton.setBackgroundColor(getColor(R.color.black));
             }
         }
+    }
+    public int counter(boolean[][] cs) {
+        int count = 0;
+        for (int i = 0; i < cellState.length; i++) {
+            for (int j = 0; j < cellState[i].length; j++) {
+                if (cellState[i][j] == true) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     public void randomize() {
